@@ -68,6 +68,7 @@ export const createTokenTool = createTool({
           symbol,
           uri,
         },
+        metadataAddress: mint.address,
       });
 
       // Sign and send the create token transaction
