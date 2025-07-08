@@ -8,7 +8,10 @@ import {
   signTransactionMessageWithSigners,
   address,
 } from "gill";
-import { loadKeypairSignerFromEnvironment } from "gill/node";
+import {
+  loadKeypairSignerFromEnvironment,
+  loadKeypairSignerFromEnvironmentBase58,
+} from "gill/node";
 import {
   buildCreateTokenTransaction,
   buildMintTokensTransaction,
@@ -42,7 +45,7 @@ export const createTokenTool = createTool({
       });
 
       // Load the signer from the default Solana CLI keyfile
-      const signer = await loadKeypairSignerFromEnvironment(
+      const signer = await loadKeypairSignerFromEnvironmentBase58(
         "SOLANA_SECRET_KEY"
       );
 

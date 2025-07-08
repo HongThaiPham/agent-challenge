@@ -1,6 +1,15 @@
 import { Agent } from "@mastra/core/agent";
 import { model } from "../../config";
 import { createTokenTool } from "./solana-tool";
+import { Memory } from "@mastra/memory";
+import { LibSQLStore } from "@mastra/libsql";
+
+// Initialize memory with LibSQLStore for persistence
+const memory = new Memory({
+  storage: new LibSQLStore({
+    url: "file:../mastra.db", // Or your database URL
+  }),
+});
 
 // Define Agent Name
 const name = "Solana Agent";
@@ -26,9 +35,10 @@ const instructions = `
       - **Get Transaction Details**: Retrieve details of a specific transaction by its signature
 `;
 
-export const yourAgent = new Agent({
+export const solanaAgent = new Agent({
   name,
   instructions,
   model,
   tools: { createTokenTool },
+  memory,
 });
